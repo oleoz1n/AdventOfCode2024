@@ -16,5 +16,6 @@ void initDictionary(Dictionary *dict);
 void addKeyValue(Dictionary *dict, const char *key, const char *value);
 char *getValue(Dictionary *dict, const char *key);
 void freeDictionary(Dictionary *dict);
+void updateKeyValue(Dictionary *dict, const char *key, const char *value);
 
 #endif // DICT_H

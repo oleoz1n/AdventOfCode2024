@@ -31,6 +31,17 @@ char *getValue(Dictionary *dict, const char *key) {
     return NULL;
 }
 
+// Atualiza o valor associado à chave
+void updateKeyValue(Dictionary *dict, const char *key, const char *value) {
+    for (int i = 0; i < dict->size; i++) {
+        if (strcmp(dict->pairs[i].key, key) == 0) {
+            free(dict->pairs[i].value);
+            dict->pairs[i].value = strdup(value);
+            return;
+        }
+    }
+}
+
 // Libera a memória do dicionário
 void freeDictionary(Dictionary *dict) {
     for (int i = 0; i < dict->size; i++) {
