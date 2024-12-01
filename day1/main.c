@@ -103,22 +103,21 @@ Dictionary calcQtd(int *list, int size) {
         snprintf(keyStr, sizeof(keyStr), "%d", list[i]);
 
         // Verifica se a chave já foi processada
-        if (getValue(&dict, keyStr) == NULL) {
-            qtd = 0;
+        const char *value = getValue(&dict, keyStr);
+        if (value == NULL) {
             // Conta as ocorrências do número
-            for (j = 0; j < size; j++) {
-                if (list[i] == list[j]) {
-                    qtd++;
-                }
-            }
-            
-            // Cria o valor como string
-            char value[10];
-            snprintf(value, sizeof(value), "%d", qtd);
-
-            // Adiciona a chave e valor ao dicionário
-            addKeyValue(&dict, keyStr, value);
+            addKeyValue(&dict, keyStr, "1");
         }
+            
+        else {
+            // Incrementa a quantidade de ocorrências
+            qtd = atoi(value);
+            qtd++;
+            char qtdStr[10];
+            snprintf(qtdStr, sizeof(qtdStr), "%d", qtd);
+            updateKeyValue(&dict, keyStr, qtdStr);
+        }
+        
     }
 
     return dict;
